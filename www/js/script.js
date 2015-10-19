@@ -1,5 +1,5 @@
 //var site_url="http://localhost/karthi_code/at_live";
-var site_url="http://dev.aesthetictoday.com";
+var site_url="http://aesthetictoday.com";
 var _wpcf7 = {"loaderUrl":site_url+"/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
 if (window.location.protocol == "https:")
 {

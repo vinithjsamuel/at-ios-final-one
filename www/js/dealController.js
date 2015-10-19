@@ -224,7 +224,7 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 
 	$timeout(function () {
 		if($scope.deals.ID!=undefined) $scope.loadExtraImages($scope.deals.ID);
-	}, 1500);
+	}, 500);
 
 });
 

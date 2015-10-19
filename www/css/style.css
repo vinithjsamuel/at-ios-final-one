@@ -7,6 +7,9 @@
 .app-content-loading .loading-spinner {
     color: #fff!important;
 }
+div.app-body .app-content{
+    background: #fff;
+}
 .sidebar-toggle i.fa-bars {
     display: inline-block;
     font-size: 25px;
@@ -80,7 +83,9 @@
     padding: 10px 20px;
 }
 .app-body .scrollable {
-    background-color: #FEFEFE;
+    background-image: url('../images/bg-gif.gif');
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .section {
     background: none;

@@ -147,9 +147,8 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 	$scope.galleryImages = {status:false,data:[]};
 
 	$scope.loadExtraImages=function(deal_id)
-	{
-		$timeout(function () {
-			$http.get(site_url + '/ajax/aesthetic_wp_load_json.php?action=getdealimagefrommeta&dealid='+deal_id)
+	{	
+		$http.get(site_url + '/ajax/aesthetic_wp_load_json.php?action=getdealimagefrommeta&dealid='+deal_id)
 			.success(function(data, status, headers, config) {
 				if(data != '"no images"'){
 					$scope.galleryImages.status = true;
@@ -160,10 +159,9 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 				}else{
 					$scope.galleryImages.status = false;
 				}
-			}).error(function(data, status, headers, config) {
-				$scope.galleryImages.status = false;
-			});
-		},2000);
+		}).error(function(data, status, headers, config) {
+			$scope.galleryImages.status = false;
+		});
 	}
 	
 	if($rootScope.deals!=null)
@@ -192,9 +190,6 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 	
 	$rootScope.$on("$getDealdetails",function(data,deal){
 		$scope.deals=deal;
-		if($scope.deals.ID!=undefined){
-			$scope.loadExtraImages($scope.deals.ID);
-		}
 
 		$rootScope.PageTitle=$scope.deals.post_title;
 		
@@ -226,6 +221,10 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 		$rootScope.toggle('dealOptionOverlay', 'off');
 		window.location=location;
 	}
+
+	$timeout(function () {
+		if($scope.deals.ID!=undefined) $scope.loadExtraImages($scope.deals.ID);
+	}, 1500);
 
 });
 

@@ -34,7 +34,7 @@
         	<button class="btn btn-primary" id="submitFrmLogin" type="submit" ng-disabled="LoginForm.$invalid">Submit</button>
             <p>&nbsp;</p>
             <p>New user please sign up <a style="text-decoration:underline;" ng-click="openSignup('loginOverlay')">here</a>.</p>
-            <p>Forgot your password? <a style="text-decoration:underline;" href="{{ site_url }}/wp-login.php?action=lostpassword">Click here</a>.</p>
+            <p>Forgot your password? <a ng-click="openForgetPassword(site_url)" style="text-decoration:underline;">Click here</a>.</p>
         	<!--<strong>Not a member ?</strong> <a class="btn btn-primary clsfloatLeft" ng-click="openSignup('loginOverlay')">Signup</a>-->
         </div>
       </div>

@@ -250,6 +250,9 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
   	$rootScope.toggle(form, 'off');
 	 window.location='#login';
   };
+  $rootScope.openForgetPassword=function(site_url){
+  	window.open(site_url+"/wp-login.php?action=lostpassword","_system");
+  };
   $rootScope.closeOvelay=function(form){
 	  if(form=='login')
 	  	$rootScope.toggle('loginOverlay', 'off');

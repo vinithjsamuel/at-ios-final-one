@@ -66,6 +66,9 @@
             <div class="clsMohDesc ar">تم منح هذا التصريح الإعلاني من وزارة الصحة استنادا إلى التراخيص المهنية / تراخيص مزاولة النشاط للمؤسسة المعلنة ومقدمي الخدمات والمنتجات الصحية بها، حيث يتعين على هؤلاء تقديم الخدمة / المنتج طبقا للأنظمة والمعايير التي وضعتها الجهات المانحة لتلك التراخيص. وزارة الصحة ليست طرفا في هذه الصفقة أو أي من شروطها مطلقا. شراء هذه الصفقة هو حصريا على مسئولية المستهلك</div>
             <div class="clsMohDesc">This advertisement permission was granted by MOH based on the professional / activity licenses for both advertising facility and its healthcare providers who should deliver the service / products in accordance with the regulations and standards set by the licensing authority. MOH is ABSOLUTELY NOT part of this deal or any of its terms . Buying the deal is exclusively the responsibility of the consumer. </div>
           </div>
+          <div class="list card" ng-if="galleryImages.status && galleryImages.data">
+            <img class="full-image" ng-repeat="galleryImg in galleryImages.data" ng-src="{{galleryImg}}">
+          </div>
         </div>
         <div class="clsMerchantDetails clearfix">
           <div class="clsMerchantLocation clsFloatLeft col-lg-8 col-md-8 col-sm-8">

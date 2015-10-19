@@ -31,29 +31,9 @@ div.app-body .app-content{
 #mainSidebar a.list-group-items i{
     width: 5%;
 }
-/*#mainSidebar .list-group-item {
-    background-color: rgba(0, 0, 0, .5);
-    border-color: transparent;
-    position: relative;
-}   
-#mainSidebar .list-group-item i {
-    display: inline-block;
-}
-#mainSidebar .list-group-item span {
-    display: inline-block;
-    left: 55px; 
-    position: absolute;
-    top: 15px;
-    width: 90%; 
-}
-#mainSidebar a.list-group-item {
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-}*/
 #mainSidebar.sidebar-left {
     background: #691741;
+    top: 6px;
 }
 #mainSidebar .app-name {
     margin: 50px 0 0;
@@ -84,7 +64,6 @@ div.app-body .app-content{
 }
 .app-body .scrollable {
     background-image: url('../images/bg-gif.gif');
-    background-position: center;
     background-repeat: no-repeat;
 }
 .section {
@@ -160,6 +139,10 @@ div.app-body .app-content{
 }
 .clear {
     clear: both;
+}
+html body{
+    padding-top: 6px;
+    background-color: #691741;
 }
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -1364,6 +1347,7 @@ p.error {
 }
 #loginOverlay .overlay-dismiss, #registerOverlay .overlay-dismiss,#appointmentOverlay .overlay-dismiss {
     color: #DB427B;
+    padding-top: 6px;
 }
 #loginOverlay .overlay-dismiss i, #referFriend .overlay-dismiss i, #registerOverlay .overlay-dismiss i {
     font-size: 30px;

@@ -134,7 +134,7 @@ app.controller('dealController',function($rootScope, $scope, $http,$location,$ro
 	
 });
 
-app.controller('dealDetailController',function($rootScope, $scope, $http,$location,$routeParams)
+app.controller('dealDetailController',function($rootScope, $scope, $http,$location,$routeParams,$timeout)
 {
 	$scope.deals=[];
 	
@@ -143,6 +143,28 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 	$rootScope.backBtnShow=true;
 	
 	$rootScope.loading = true;
+
+	$scope.galleryImages = {status:false,data:[]};
+
+	$scope.loadExtraImages=function(deal_id)
+	{
+		$timeout(function () {
+			$http.get(site_url + '/ajax/aesthetic_wp_load_json.php?action=getdealimagefrommeta&dealid='+deal_id)
+			.success(function(data, status, headers, config) {
+				if(data != '"no images"'){
+					$scope.galleryImages.status = true;
+					for(var i=0;i<data.length;i++){
+						var galimgurl = site_url+'/wp-content/uploads/dealextraimg/'+data[i];
+						$scope.galleryImages.data.push(galimgurl);
+					}
+				}else{
+					$scope.galleryImages.status = false;
+				}
+			}).error(function(data, status, headers, config) {
+				$scope.galleryImages.status = false;
+			});
+		},2000);
+	}
 	
 	if($rootScope.deals!=null)
 	{
@@ -170,7 +192,10 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 	
 	$rootScope.$on("$getDealdetails",function(data,deal){
 		$scope.deals=deal;
-		
+		if($scope.deals.ID!=undefined){
+			$scope.loadExtraImages($scope.deals.ID);
+		}
+
 		$rootScope.PageTitle=$scope.deals.post_title;
 		
 		$rootScope.dealEndTime=parseInt($scope.deals.deals_millisecond);
@@ -187,7 +212,8 @@ app.controller('dealDetailController',function($rootScope, $scope, $http,$locati
 	})
 
 	$scope.gotoMaps = function(lat,long){
-		window.open("https://www.google.com/maps/dir//"+lat+","+long,"_system");
+		window.open("http://maps.apple.com/?q="+lat+","+long,"_system");
+		/*window.open("https://www.google.com/maps/dir//"+lat+","+long,"_system");*/
 	}
 	
 	$scope.goToBuyPage=function(deal_name,option)

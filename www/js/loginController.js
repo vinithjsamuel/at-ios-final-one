@@ -310,6 +310,8 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
                 $rootScope.userid = data.success.user_id;
                 $rootScope.userdata = data.success.user_data;
                 $cookieStore.put('userid', $rootScope.userid);
+                var vintesting = $cookieStore.get('userid');
+                alert(vintesting+$rootScope.userid);
                 $cookieStore.put('userdata', $rootScope.userdata);
                 $rootScope.toggle('loginOverlay', 'off');
                 if (typeof $cookieStore.get('lastRedirectURL') != 'undefined' && $cookieStore.get('lastRedirectURL') != "") {

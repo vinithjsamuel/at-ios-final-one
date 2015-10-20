@@ -153,7 +153,11 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore){
-
+	if(localStorage.getItem('vintesting')==null){
+	  	localStorage.setItem('vintesting','vinith samuel');
+	  }else{
+	  	alert(localStorage.getItem('vintesting'));
+	  }
   $rootScope.backBtnShow=false;
   $rootScope.site_url=site_url;
   $rootScope.mainTle='';

@@ -153,6 +153,8 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore){
+
+	if($cookieStore.get('userdata')) alert($cookieStore.get('userdata'));
 	
   $rootScope.backBtnShow=false;
   $rootScope.site_url=site_url;
@@ -353,6 +355,8 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 	  	
 	  return parseInt(at_user_balance)+parseInt(user_wallet_points);
   }
+
+  if($cookieStore.get('userdata')) alert($cookieStore.get('userdata'));
 });
 app.controller('atPayFailedController', function($rootScope, $scope, $http,$location,$timeout){
 	if($location.$$search.uid != 'undefined'){
@@ -472,8 +476,7 @@ app.controller('onInAppBrowseController', function($rootScope, $scope, $http,$lo
 			  		$rootScope.atIsSessionExist = false;
 			  		$rootScope.atStartCheckingSession = false;
 			  		$rootScope.onInApp.close();
-			  		if($rootScope.onInApp.close()) $location.url('deals/all');
-			  	},300000);
+			  	},240000);
 		  	},5000);
 		  	$rootScope.onInAppCreateSession();
 		  	$rootScope.onInApp.addEventListener('exit', function(event) {

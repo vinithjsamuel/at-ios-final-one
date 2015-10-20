@@ -153,7 +153,11 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore){
-alert(localStorage.getItem('userid'));
+if(localStorage.getItem('userdata')!=null){
+	$rootScope.errorhandling = localStorage.getItem('userdata');
+}else{
+	$rootScope.errorhandling = 'no data';
+}
   $rootScope.backBtnShow=false;
   $rootScope.site_url=site_url;
   $rootScope.mainTle='';

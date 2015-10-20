@@ -66,8 +66,8 @@
             <div class="clsMohDesc ar">تم منح هذا التصريح الإعلاني من وزارة الصحة استنادا إلى التراخيص المهنية / تراخيص مزاولة النشاط للمؤسسة المعلنة ومقدمي الخدمات والمنتجات الصحية بها، حيث يتعين على هؤلاء تقديم الخدمة / المنتج طبقا للأنظمة والمعايير التي وضعتها الجهات المانحة لتلك التراخيص. وزارة الصحة ليست طرفا في هذه الصفقة أو أي من شروطها مطلقا. شراء هذه الصفقة هو حصريا على مسئولية المستهلك</div>
             <div class="clsMohDesc">This advertisement permission was granted by MOH based on the professional / activity licenses for both advertising facility and its healthcare providers who should deliver the service / products in accordance with the regulations and standards set by the licensing authority. MOH is ABSOLUTELY NOT part of this deal or any of its terms . Buying the deal is exclusively the responsibility of the consumer. </div>
           </div>
-          <div class="list card" ng-if="galleryImages.status && galleryImages.data" ng-repeat="galleryImg in galleryImages.data">
-            <img class="full-image" ng-src="{{galleryImg}}">
+          <div class="list card" ng-if="galleryImages.status && galleryImages.data" ng-repeat="galleryImg in galleryImages.data | limitTo:1">
+            <img class="full-image" ng-src="{{galleryImg}}" src="images/loading_circle.gif">
           </div>
         </div>
         <div class="clsMerchantDetails clearfix">
@@ -93,7 +93,7 @@
         </div>
         <div class="clear"></div>
         <div class="getDirection clearfix col-lg-12 col-md-12 col-sm-12">
-          <div class="locationMap"> <a href="https://www.google.com/maps/place/{{ deals.merchent_details._aes_latitude+','+deals.merchent_details._aes_longitude }}" target="_blank"> <img ng-src="http://maps.googleapis.com/maps/api/staticmap?center={{deals.merchent_details._aes_latitude+','+deals.merchent_details._aes_longitude }}&zoom=15&size=1000x400&markers={{deals.merchent_details._aes_latitude+','+deals.merchent_details._aes_longitude }}" /> </a> </div>
+          <div class="locationMap"> <a ng-click="gotoMaps(deals.merchent_details._aes_latitude,deals.merchent_details._aes_longitude)"> <img ng-src="http://maps.googleapis.com/maps/api/staticmap?center={{deals.merchent_details._aes_latitude+','+deals.merchent_details._aes_longitude }}&zoom=15&size=1000x400&markers={{deals.merchent_details._aes_latitude+','+deals.merchent_details._aes_longitude }}" /> </a> </div>
           <a class="btn btn-primary dealDetailsMapDirection" ng-click="gotoMaps(deals.merchent_details._aes_latitude,deals.merchent_details._aes_longitude)">Get Directions</a> </div>
         <p>&nbsp;</p>
       </div>

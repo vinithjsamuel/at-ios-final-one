@@ -15,12 +15,11 @@
                 <div>
                     Valid from {{ purchase.deal_paid }} to {{ purchase.deal_expiry_date }}
                     <div ng-if="purchase.is_full_paid == 1">
-                        <p><a href="{{ site_url+'/voucher?type=print&voucher_no='+purchase.reff_code}}" target="_blank">View</a></p>
-                        <p><a href="{{ site_url+'/voucher?type=dowload&voucher_no='+purchase.reff_code}}" target="_blank">Download</a></p>
+                        <p><a ng-click="gotobrowser('print',purchase.reff_code)">View</a></p>
+                        <p><a ng-click="gotobrowser('download',purchase.reff_code)">Download</a></p>
                     </div>
                     <div ng-if="purchase.is_full_paid != 1">
-                        <p><a href="#/mypurchase">View(waiting for payment)</a></p>
-                        <p><a href="#/mypurchase">Download(waiting for payment)</a></p>
+                        <p><a>Status: Yet to update payment info!</a></p>
                     </div>
                 </div>
             </div>

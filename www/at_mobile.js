@@ -47,9 +47,8 @@ app.config(function($routeProvider, $locationProvider) {
   $routeProvider.when('/partner-with-us',  {templateUrl: "page.html",controller: pageController}); 
   $routeProvider.when('/our-vission',  {templateUrl: "page.html",controller: pageController}); 
   $routeProvider.when('/contact',   {templateUrl: "page.html",controller: pageController}); 
-  $routeProvider.when('/web',   {templateUrl: "web.html"});
-  $routeProvider.when('/terms-and-conditions',   {templateUrl: "page.html",controller: pageController}); 
-  $routeProvider.when('/faqs',   {templateUrl: "page.html",controller: pageController}); 
+  $routeProvider.when('/terms-and-conditions',   {templateUrl: "terms.html"}); 
+  $routeProvider.when('/faqs',   {templateUrl: "faqs.html"}); 
   
   $routeProvider.when('/categories',   {templateUrl: "category.html"});
   $routeProvider.when('/subcategories/:category_slug', {templateUrl: "subcategory.html",controller: 'subCategoryController'});
@@ -295,6 +294,7 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 		  $cookieStore.remove("userdata");
 		  $rootScope.userid=0;
 		  $rootScope.userdata=null;
+		  $rootScope.loading = false;
 		  $location.url('deals/all');
 	  });
   };
@@ -409,14 +409,14 @@ app.controller('atPaySuccessController', function($rootScope, $scope, $http,$loc
 	},5000);
 });
 
-app.controller('webController', function($rootScope, $scope, $http,$location){
+/*app.controller('webController', function($rootScope, $scope, $http,$location){
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		sessionStorage.at_device_preferred = 'web';
 		window.location = site_url;
 	}else{
 		alert('Device Not Found!');
 	}
-});
+});*/
 
 /*in app browser for mobile*/
 app.controller('onInAppBrowseController', function($rootScope, $scope, $http,$location, $timeout, $cookieStore){
@@ -464,36 +464,39 @@ app.controller('onInAppBrowseController', function($rootScope, $scope, $http,$lo
 			},400);
 		}
 	if($scope.userid !='undefined' && $scope.ref_id !='undefined'){
-		$rootScope.onInApp = window.open(site_url+'/at-innovate-payment-check-out?ref_id='+$scope.ref_id+'&mobile=yes', '_blank', 'location=no,hidden=yes,closebuttoncaption=Done,toolbar=no');
-	  	//$rootScope.onInApp = window.open(site_url, '_blank','location=no,hidden=yes,closebuttoncaption=Done,toolbar=no');
-	  	$timeout(function () {
-	  		$rootScope.onInApp.show();
-	  	},6000);
-	  	$rootScope.onInAppCreateSession();
-	  	$rootScope.onInApp.addEventListener('exit', function(event) {
-	  		$timeout(function () {
-	  			if($rootScope.atIsSessionExistCloseAction == 'success'){
-	  				$http({method: 'POST',data: {deletems: $scope.userid,redirect: 'success'},url: site_url+'/ajax/aesthetic_deals_json.php'})
-			    	.success(function(data) {
-			    		location.replace('#thank-you');
-			    		/*$location.url('failed');*/
-					});
-					$location.url('thank-you');
-	  			}else if($rootScope.atIsSessionExistCloseAction == 'failed'){
-	  				$http({method: 'POST',data: {deletems: $scope.userid,redirect: 'failed'},url: site_url+'/ajax/aesthetic_deals_json.php'})
-			    	.success(function(data) {
-			    		location.replace('#failed');
-					});
-					$location.url('failed');
-	  			}else{
-	  				$http({method: 'POST',data: {deletems: $scope.userid,redirect: 'failed'},url: site_url+'/ajax/aesthetic_deals_json.php'})
-			    	.success(function(data) {
-			    		location.replace('#failed');
-					});
-	  				location.replace('#failed');
-	  			}
-	  		},100);
-	  	});
+		if($scope.ref_id!=undefined){
+			$rootScope.onInApp = window.open(site_url+'/at-innovate-payment-check-out?ref_id='+$scope.ref_id+'&mobile=yes', '_blank', 'location=no,hidden=yes,closebuttoncaption=Done,toolbar=no');
+			$timeout(function () {
+		  		$rootScope.onInApp.show();
+		  	},5000);
+		  	$rootScope.onInAppCreateSession();
+		  	$rootScope.onInApp.addEventListener('exit', function(event) {
+		  		$timeout(function () {
+		  			if($rootScope.atIsSessionExistCloseAction == 'success'){
+		  				$http({method: 'POST',data: {deletems: $scope.userid,redirect: 'success'},url: site_url+'/ajax/aesthetic_deals_json.php'})
+				    	.success(function(data) {
+				    		location.replace('#thank-you');
+				    		/*$location.url('failed');*/
+						});
+						$location.url('thank-you');
+		  			}else if($rootScope.atIsSessionExistCloseAction == 'failed'){
+		  				$http({method: 'POST',data: {deletems: $scope.userid,redirect: 'failed'},url: site_url+'/ajax/aesthetic_deals_json.php'})
+				    	.success(function(data) {
+				    		location.replace('#failed');
+						});
+						$location.url('failed');
+		  			}else{
+		  				$http({method: 'POST',data: {deletems: $scope.userid,redirect: 'failed'},url: site_url+'/ajax/aesthetic_deals_json.php'})
+				    	.success(function(data) {
+				    		location.replace('#failed');
+						});
+		  				location.replace('#failed');
+		  			}
+		  		},100);
+		  	});
+		}else{
+			//$location.url('login');
+		}
 	}
 
 });

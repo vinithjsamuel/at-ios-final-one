@@ -265,4 +265,13 @@ app.controller('myPurchaseController',function($rootScope,$scope,$http,$location
                 $location.url('deals/all');
             });
 	}
+
+    $scope.gotobrowser = function(type,data){
+        if(type=='download'){
+            window.open(site_url+"/voucher?type=download&voucher_no="+data,"_system");
+        }
+        if(type=='print'){
+            window.open(site_url+"/voucher?type=print&voucher_no="+data,"_system");
+        }
+    }
 })

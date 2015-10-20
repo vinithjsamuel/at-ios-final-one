@@ -45,7 +45,7 @@
               <input type="checkbox" name="accept_terms" id="regAcceptTerms" value="1" ng-model="userRegField.accept_terms" required />
             </div>
             <div class="clsFloatLeft col-lg-10 col-md-10 col-sm-10 clsOptVal">
-              <label for="regAcceptTerms">I accept Aesthetic Today's <a href="#/terms-and-conditions" target="_blank">Terms and Conditions</a></label>
+              <label for="regAcceptTerms">I accept Aesthetic Today's Terms and Conditions</label>
             </div>
           </div>
             
@@ -92,13 +92,13 @@
               <input type="checkbox" name="accept_terms" id="accept_terms" value="1" ng-model="userField.accept_terms" required />
             </div>
             <div class="clsFloatLeft col-lg-10 col-md-10 col-sm-10 clsOptVal">
-              <label for="accept_terms">I accept Aesthetic Today's <a href="#/terms-and-conditions" target="_blank">Terms and Conditions</a></label>
+              <label for="accept_terms">I accept Aesthetic Today's Terms and Conditions</label>
             </div>
           </div>
         </div>
         <div class="clsFrmField clearfix formDesc">
           <button class="btn btn-primary" id="submitFrmLogin" type="submit" ng-disabled="BuyLoginForm.$invalid">Submit</button>
-          <div class="clsText"><a href="{{ site_url }}/wp-login.php?action=lostpassword">Forgot your password?</a></div>
+          <div class="clsText"><a ng-click="openForgetPassword(site_url)">Forgot your password?</a></div>
           <div class="clsHaveAccount"><div class="clsFloatLeft clsText">New user?</div> <a ng-mobile-click="isShowLoginSignupForm()">Sign Up</a><div class="clear"></div></div>
         </div>
       </div>

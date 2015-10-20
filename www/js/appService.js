@@ -36,6 +36,8 @@ app.factory('apiFactory', function($http) {
                 url: site_url + '/mobile_api.php'
             }).success(function(data) {
                 callback(data.success)
+            }).error(function(data){
+                callback('error');
             })
         },
         getEmirates: function(callback) {
@@ -60,6 +62,8 @@ app.factory('apiFactory', function($http) {
                 url: site_url + '/mobile_api.php'
             }).success(function(data) {
                 if (data.success) callback(data.success)
+            }).error(function(data){
+                callback('error');
             })
         },
         buydealDetails: function(callback, deal_name) {

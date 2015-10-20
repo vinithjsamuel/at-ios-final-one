@@ -2083,3 +2083,6 @@ button.appointmentSubmitBtn,button.appointmentSubmitBtn:hover{  color: white;
   div.item-divider{text-align: center;color: #CA3482}
 label.availabilityClsLabel,.at-color-light,div a.at-color-light{color:#CA3482; }
 .placecodCls select{-webkit-appearance: none;padding: 7px 15px;border-radius: 0;width: 64%;margin-top: 5px;border: none;}
+div.about_us.page_content{text-align: justify;color: #691741;}
+div.about_us.page_content a{text-decoration: underline; color: #691741;}
+div.about_us.page_content h2{text-decoration: underline; color: #691741;}

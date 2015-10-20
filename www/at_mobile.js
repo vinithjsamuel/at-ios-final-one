@@ -153,9 +153,7 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore){
-
-	if($cookieStore.get('userdata')) alert($cookieStore.get('userdata'));
-	
+	localStorage.setItem("vintest", "Vinith Samuel");
   $rootScope.backBtnShow=false;
   $rootScope.site_url=site_url;
   $rootScope.mainTle='';
@@ -355,8 +353,6 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 	  	
 	  return parseInt(at_user_balance)+parseInt(user_wallet_points);
   }
-
-  if($cookieStore.get('userdata')) alert($cookieStore.get('userdata'));
 });
 app.controller('atPayFailedController', function($rootScope, $scope, $http,$location,$timeout){
 	if($location.$$search.uid != 'undefined'){
@@ -511,7 +507,7 @@ app.controller('onInAppBrowseController', function($rootScope, $scope, $http,$lo
 });
 
 app.controller('subCategoryController', function($rootScope, $scope, $http,$routeParams){
-	
+	alert(localStorage.vintest);
 	$scope.checkSpecificCategory=function(cat_slug)
 	  {
 		  var deal_count=0;

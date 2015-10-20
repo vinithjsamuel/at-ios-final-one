@@ -268,10 +268,10 @@ app.controller('myPurchaseController',function($rootScope,$scope,$http,$location
 
     $scope.gotobrowser = function(type,data){
         if(type=='download'){
-            window.open(site_url+"/voucher?type=download&voucher_no="+data,"_system");
+            window.open(site_url+"/voucher?type=dowload&user_id="+$rootScope.userdata.ID+"&voucher_no="+data,"_system");
         }
         if(type=='print'){
-            window.open(site_url+"/voucher?type=print&voucher_no="+data,"_system");
+            window.open(site_url+"/voucher?type=print&user_id="+$rootScope.userdata.ID+"&voucher_no="+data,"_system");
         }
     }
 })

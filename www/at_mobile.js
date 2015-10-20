@@ -468,6 +468,12 @@ app.controller('onInAppBrowseController', function($rootScope, $scope, $http,$lo
 			$rootScope.onInApp = window.open(site_url+'/at-innovate-payment-check-out?ref_id='+$scope.ref_id+'&mobile=yes', '_blank', 'location=no,hidden=yes,closebuttoncaption=Done,toolbar=no');
 			$timeout(function () {
 		  		$rootScope.onInApp.show();
+		  		$timeout(function () {
+			  		$rootScope.atIsSessionExist = false;
+			  		$rootScope.atStartCheckingSession = false;
+			  		$rootScope.onInApp.close();
+			  		if($rootScope.onInApp.close()) $location.url('deals/all');
+			  	},300000);
 		  	},5000);
 		  	$rootScope.onInAppCreateSession();
 		  	$rootScope.onInApp.addEventListener('exit', function(event) {

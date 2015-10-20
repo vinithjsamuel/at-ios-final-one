@@ -43,6 +43,10 @@ app.controller('dealController',function($rootScope, $scope, $http,$location,$ro
 			cat_id=filter=$rootScope.selectedCatId;
 		
 			$rootScope.PageTitle=$rootScope.selectedCatName.toUpperCase()+" - Deals ";
+			if($rootScope.selectedCatName=='Body Arts'){
+				$rootScope.selectedCatName = 'Swarovski Tattoo';
+				$rootScope.PageTitle=$rootScope.selectedCatName.toUpperCase()+" - Deals ";
+			}
 		}
 		else
 		{

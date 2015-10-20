@@ -2,11 +2,12 @@
   <div class="scrollable-content">
     <div class="list-group">
       <a href="#/deals/all" class="list-group-items">
-      All Deals
+      <span>All Deals</span>
         <i class="fa fa-chevron-right pull-right"></i>
       </a>
       <a ng-repeat="category in categories" ng-href="#/subcategories/{{ category.slug }}" class="list-group-items" ng-click="SetCategory(category.id,category.name)" ng-show="catDealCount(category.slug)!=0">
-        {{ category.name }} 
+        <span ng-if='category.name=="Body Arts"'>Swarovski Tattoo </span>
+        <span ng-if='category.name!="Body Arts"'>{{ category.name }} </span>
         <i class="fa fa-chevron-right pull-right"></i>
       </a>
       <!--<a ng-repeat="category in categories" class="list-group-items" ng-click="SetCategory(category.id,category.name)" ng-show="catDealCount(category.slug)==0">

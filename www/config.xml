@@ -24,6 +24,7 @@
     <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install 
     location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
+    <preference name="BackupWebStorage" value="local" />
     <!-- Plugins -->
 
     <!-- Core plugins -->
@@ -31,6 +32,7 @@
 <gap:plugin name="org.apache.cordova.dialogs" source="pgb" version="0.2.10" />
 <gap:plugin name="org.apache.cordova.splashscreen" source="pgb" version="0.3.4" />
 <gap:plugin name="org.apache.cordova.inappbrowser" source="pgb" version="0.5.2" />
+<gap:plugin name="org.apache.cordova.storage"/>
 <icon src="icon-small.png" gap:platform="ios" width="29" height="29" />
 <icon src="icon-40.png" gap:platform="ios" width="40" height="40" />
 <icon src="icon-50.png" gap:platform="ios" width="50" height="50" />

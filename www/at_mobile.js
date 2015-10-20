@@ -153,10 +153,15 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore){
+	var vinobj = {"ID":"964","user_login":"vinithjsamuel@gmail.com","user_pass":"$P$BOiv6L6WTQSWkyTFCZP.bby1HOBHuv0","user_nicename":"samul asd Vinith gyyyyyyyyyyyyyyyyyyyyyyy6667","user_email":"vinithjsamuel@gmail.com","user_url":"","user_registered":"2015-06-11 07:44:54","user_activation_key":"","user_status":"0","display_name":"samul asd Vinith gyyyyyyyyyyyyyyyyyyyyyyy6667","first_name":"samul asd Vinith gyyyyyyyyyyyyyyyyyyyyyyy6667","last_name":"samuel","nickname":"vinithjsamuel@gmail.com","description":"","rich_editing":"true","comment_shortcuts":"false","admin_color":"fresh","use_ssl":"0","show_admin_bar_front":"true","wp_capabilities":"a:1:{s:10:\"subscriber\";b:1;}","wp_user_level":"0","dismissed_wp_pointers":"wp350_media,wp360_revisions,wp360_locks,wp390_widgets","at_refered_by":"0","at_subscribe_news_letter":"2","_aes_contact":"7376774","_aes_address_one":"saDubayy asd sdafs","_aes_address_two":"sadowntown asd","_aes_address_emirate":"9","_aes_address_pin":"7773312","at_first_name":"samul asd Vinith gyyyyyyyyyyyyyyyyyyyyyyy6667","at_last_name":"samuel","at_user_first_deal":"0","at_user_sign_up_points":"1","at_user_points":"36.58","at_user_refferel_points":"0","at_user_purchasing_points":"88.58","aim":"","yim":"","jabber":"","googleplus":"","at_user_gender":"2","at_user_life_time_point":"188.58","at_user_balance":"36.58","default_password_nag":"","user_mobile_session":"start","nationality":"Indian","at_user_subscribed_city":"3","wallet":0,"user_wallet_points":0,"total_poins_in_wallet":36,"used_points":0,"logout_url":"http:\/\/dev.aesthetictoday.com\/wp-login.php?action=logout&amp;_wpnonce=dc0240d4c1"};
+	vinobjstring = JSON.stringify(vinobj);
+
 	if(localStorage.getItem('vintesting')==null){
-	  	localStorage.setItem('vintesting','vinith samuel');
+	  	localStorage.setItem('vintesting',vinobjstring);
 	  }else{
-	  	alert(localStorage.getItem('vintesting'));
+	  	var resultset = JSON.parse(localStorage.getItem('vintesting'));
+	  	$rootScope.errorhandling = resultset;
+	  	alert(resultset);
 	  }
   $rootScope.backBtnShow=false;
   $rootScope.site_url=site_url;

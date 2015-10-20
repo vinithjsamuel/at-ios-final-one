@@ -4,7 +4,7 @@
       <div id="no-results" class="feed-message" ng-show="deal_count==0">
         <h3>Uh-oh. No matching deals.</h3>
         <h5>Hurry back soon for deals that are just right for you.</h5>
-      </div>
+      </div>{{errorhandling}}
       <div ng-repeat="deals in deals" class="atDealsListMain">
         <div class="clsDealsHeader clearfix atDealsListHeader">
             <div class="clsDealTle col-lg-12 col-md-12 col-sm-12 text-center"> <a href="#deal/{{deals.cat_slug}}/{{deals.post_name}}" data-post-id="{{deals.post_name}}" class="clsDealDetailView" data-post-cat-name="{{deals.cat_name}}" ng-bind-html="deals.post_title"></a> </div>

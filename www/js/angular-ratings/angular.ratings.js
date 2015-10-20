@@ -25,8 +25,8 @@
 			  $rootScope.ratingUpdate['resMessage']=[];
 			  if($cookieStore.get('userid')==0)
 			  {
-				$rootScope.ratingUpdate.resMessage[0]={msgType:'alert-error',msg:'Please login before rating the deals.'};
-				return false;
+  				$rootScope.ratingUpdate.resMessage[0]={msgType:'alert-error',msg:'Please login before rating the deals.'};
+  				return false;
 			  }
               return $http.post($attrs.notifyUrl, {
                 id: $scope.notifyId,

@@ -14,9 +14,27 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
         $scope.UpdatePwdFrm = 0;
         $scope.UpdateEmailPreFrm = 0;
         $scope.atChangePassword = {};
-        /*$rootScope.emirates = $cookieStore.get('emirates');
-        $scope.emiratesOption = $rootScope.emirates;*/
         if (typeof $cookieStore.get('userdata') != undefined) {
+            $scope.atUpdateUsr = $rootScope.userdata;
+            $scope.atUpdateUsr.first_name = $rootScope.userdata.at_first_name;
+            $scope.atUpdateUsr.last_name = $rootScope.userdata.at_last_name;
+            if ($rootScope.userdata != null) {
+                $scope.atbillingAdrUpdate.aes_address_one = $rootScope.userdata._aes_address_one;
+                $scope.atbillingAdrUpdate.aes_address_two = $rootScope.userdata._aes_address_two;
+                $scope.atbillingAdrUpdate.aes_address_emirate = $rootScope.userdata._aes_address_emirate;
+                $("#aes_address_emirate").val($rootScope.userdata._aes_address_emirate);
+                $scope.atbillingAdrUpdate.aes_address_pin = $rootScope.userdata._aes_address_pin;
+                $scope.atEmailPreUpdate.at_user_subscribed_city = $rootScope.userdata.at_user_subscribed_city;
+                $("#at_user_subscribed_city").val($rootScope.userdata.at_user_subscribed_city);
+                if ($rootScope.userdata.at_subscribe_news_letter == undefined){
+                    $scope.atEmailPreUpdate.at_subscribe_news_letter = 4;
+                }
+                else $scope.atEmailPreUpdate.at_subscribe_news_letter = $rootScope.userdata.at_subscribe_news_letter;
+            }
+            $scope.atUpdateUsr.resMessage = [];
+        }
+        if(localStorage.getItem('userdata')!=null){
+            $rootScope.userdata = JSON.parse(localStorage.getItem('userdata'));
             $scope.atUpdateUsr = $rootScope.userdata;
             $scope.atUpdateUsr.first_name = $rootScope.userdata.at_first_name;
             $scope.atUpdateUsr.last_name = $rootScope.userdata.at_last_name;
@@ -39,7 +57,7 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
 
     	
 	if($rootScope.userdata && $rootScope.userdata!=undefined){
-		if($cookieStore.get('userdata')==undefined){
+		if($cookieStore.get('userdata')==undefined || localStorage.getItem('userdata')==null){
 			$http.get(site_url + '/ajax/aesthetic_wp_load_json.php?platform=mobile&getusermetainfobyid=yes&userid='+$rootScope.userdata.ID)
 			.success(function(data, status, headers, config) {
 				if(data && data!=""){
@@ -49,6 +67,7 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
 						$rootScope.userdata[datakeys[i]]=data[datakeys[i]][0];
 					}
 					$cookieStore.put('userdata', $rootScope.userdata);
+                    localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
 					$rootScope.loading = false;
 					$scope.accountinfoload();
 				}
@@ -60,6 +79,9 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
 		}else{
 			$rootScope.loading = false;
 			$rootScope.userdata = $cookieStore.get('userdata');
+            if(localStorage.getItem('userdata')!=null){
+                $rootScope.userdata = JSON.parse(localStorage.getItem('userdata'));
+            }
 			$scope.accountinfoload();
 		}
 	}else{
@@ -116,6 +138,7 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
                     if(data.success.user_detail && data.success.user_detail.user_pass!=null){
                         $rootScope.userdata.user_pass = data.success.user_detail.user_pass;
                         $cookieStore.put('userdata', $rootScope.userdata);
+                        localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
                     }
                 }
                 $scope.atChangePassword = null;
@@ -160,6 +183,7 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
                 $rootScope.userdata._aes_address_emirate = city;
                 $rootScope.userdata._aes_address_pin = po_box;
                 $cookieStore.put('userdata', $rootScope.userdata);
+                localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
             }
         })
     };
@@ -202,6 +226,7 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
                 $rootScope.userdata.at_last_name = last_name;
                 $rootScope.userdata.at_user_gender = gender;
                 $cookieStore.put('userdata', $rootScope.userdata);
+                localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
             }
             $scope.UpdateUsrFrm = 0;
         })
@@ -236,6 +261,7 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
                 $rootScope.userdata.at_user_subscribed_city = subscribe_city;
                 $rootScope.userdata.at_subscribe_news_letter = emailpreferences;
                 $cookieStore.put('userdata', $rootScope.userdata);
+                localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
             }
             $scope.UpdateEmailPreFrm = 0;
         })

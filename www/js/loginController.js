@@ -60,7 +60,9 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
                 $rootScope.userid = data.success.user_id;
                 $rootScope.userdata = data.success.user_data;
                 $cookieStore.put('userid', $rootScope.userid);
+                localStorage.setItem('userid',JSON.stringify($rootScope.userid));
                 $cookieStore.put('userdata', $rootScope.userdata);
+                localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
                 $rootScope.dealcheck_outcheckout();
             }
         })
@@ -154,7 +156,9 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
                 $rootScope.userid = data.success.user_id;
                 $rootScope.userdata = data.success.user_data;
                 $cookieStore.put('userid', $rootScope.userid);
+                localStorage.setItem('userid',JSON.stringify($rootScope.userid));
                 $cookieStore.put('userdata', $rootScope.userdata);
+                localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
                 $rootScope.dealcheck_outcheckout();
             }
         })
@@ -267,6 +271,8 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
                 $rootScope.userdata = data.success.user_data;
                 $cookieStore.put('userid', $rootScope.userid);
                 $cookieStore.put('userdata', $rootScope.userdata);
+                localStorage.setItem('userid',JSON.stringify($rootScope.userid));
+                localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
                 $rootScope.toggle('registerOverlay', 'off');
                 if (typeof $cookieStore.get('lastRedirectURL') != 'undefined' && $cookieStore.get('lastRedirectURL') != "") {
                     var lastRedirectURL = "#" + $cookieStore.get('lastRedirectURL');
@@ -310,9 +316,9 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
                 $rootScope.userid = data.success.user_id;
                 $rootScope.userdata = data.success.user_data;
                 $cookieStore.put('userid', $rootScope.userid);
-                var vintesting = $cookieStore.get('userid');
-                alert(vintesting+$rootScope.userid);
                 $cookieStore.put('userdata', $rootScope.userdata);
+                localStorage.setItem('userid',JSON.stringify($rootScope.userid));
+                localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
                 $rootScope.toggle('loginOverlay', 'off');
                 if (typeof $cookieStore.get('lastRedirectURL') != 'undefined' && $cookieStore.get('lastRedirectURL') != "") {
                     var lastRedirectURL = "#" + $cookieStore.get('lastRedirectURL');

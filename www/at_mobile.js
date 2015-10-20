@@ -176,13 +176,27 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
   {
 	  apiFactory.getEmirates(function(data){
 	  	$rootScope.emirates=data;
-		$cookieStore.put('emirates',$rootScope.emirates);
+	  	$cookieStore.put('emirates',$rootScope.emirates);
+	  	localStorage.setItem('emirates',JSON.stringify($rootScope.emirates));
 	  })
   }
   else
   {
 	  $rootScope.emirates = $cookieStore.get('emirates');
+	  if(localStorage.getItem('emirates')!=null){
+	  	$rootScope.emirates = JSON.parse(localStorage.getItem('emirates'));
+	  }
   }
+
+  if(localStorage.getItem('emirates')==null){
+  	apiFactory.getEmirates(function(data){
+	  	$rootScope.emirates=data;
+	  	localStorage.setItem('emirates',JSON.stringify($rootScope.emirates));
+	  })
+  }else{
+  	$rootScope.emirates = JSON.parse(localStorage.getItem('emirates'));
+  }
+
   if(typeof $cookieStore.get('userdata') == 'undefined')
   {
 	  apiFactory.UserService(function(data){
@@ -192,7 +206,9 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 			$rootScope.userid=0;
 			$rootScope.userdata=null;
 			$cookieStore.put('userid',$rootScope.userid);
+			localStorage.setItem('userid',JSON.stringify($rootScope.userid));
 			$cookieStore.put('userdata',$rootScope.userdata);
+			localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
 		}
 		if(data.success)
 		{
@@ -201,7 +217,9 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 			$rootScope.loading = false;
 		}
 		$cookieStore.put('userid',$rootScope.userid);
+		localStorage.setItem('userid',JSON.stringify($rootScope.userid));
 		$cookieStore.put('userdata',$rootScope.userdata);
+		localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
 	  })
 	 
   }
@@ -210,7 +228,39 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 	  $rootScope.userid=$cookieStore.get('userid');
 	  
 	  $rootScope.userdata=$cookieStore.get('userdata');
+
+	  if(localStorage.getItem('userid')!=null){
+	  	$rootScope.userid = JSON.parse(localStorage.getItem('userid'));
+	  }
+	  if(localStorage.getItem('userdata')!=null){
+	  	$rootScope.userdata = JSON.parse(localStorage.getItem('userdata'));
+	  }
   }
+
+  if(localStorage.getItem('userdata')==null){
+  	apiFactory.UserService(function(data){
+		if(data.error)
+		{   
+			$rootScope.loading = false;
+			$rootScope.userid=0;
+			$rootScope.userdata=null;
+			localStorage.setItem('userid',JSON.stringify($rootScope.userid));
+			localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
+		}
+		if(data.success)
+		{
+			$rootScope.userid=data.success.user_id;
+			$rootScope.userdata=data.success.user_data;
+			$rootScope.loading = false;
+		}
+		localStorage.setItem('userid',JSON.stringify($rootScope.userid));
+		localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
+	  })
+  }else{
+  	$rootScope.userdata = JSON.parse(localStorage.getItem('userdata'));
+  }
+
+
   $rootScope.$on("$routeChangeStart", function(data){
     $rootScope.loading = true;
   });
@@ -381,6 +431,9 @@ app.controller('atPaySuccessController', function($rootScope, $scope, $http,$loc
 			$http.get(site_url + '/ajax/aesthetic_wp_load_json.php?platform=mobile&getusermetainfobyid=yes&userid='+$rootScope.userdata.ID)
 			.success(function(data, status, headers, config) {
 				$rootScope.userdata = $cookieStore.get('userdata');
+				if(localStorage.getItem('userdata')!=null){
+					$rootScope.userdata = JSON.parse(localStorage.getItem('userdata'));
+				}
 				if(data._aes_address_pin[0]){
 					$rootScope.userdata._aes_address_pin=data._aes_address_pin[0];
 				}
@@ -403,6 +456,7 @@ app.controller('atPaySuccessController', function($rootScope, $scope, $http,$loc
 					$rootScope.userdata.at_last_name=data.at_last_name[0];
 				}
 				$cookieStore.put('userdata', $rootScope.userdata);
+				localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
 			}).error(function(data, status, headers, config) {});
 		}
 		location.replace('#deals/all');

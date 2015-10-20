@@ -176,7 +176,8 @@ if(localStorage.getItem('userdata')!=null){
   if($location.$$search.earned_points!='undefined')
   	 $rootScope.earned_points=$location.$$search.earned_points;
  
-  if(typeof $cookieStore.get('emirates') == 'undefined' )
+ /********ATVIN Storage code********/
+  /*if(typeof $cookieStore.get('emirates') == 'undefined' )
   {
 	  apiFactory.getEmirates(function(data){
 	  	$rootScope.emirates=data;
@@ -190,7 +191,7 @@ if(localStorage.getItem('userdata')!=null){
 	  if(localStorage.getItem('emirates')!=null){
 	  	$rootScope.emirates = JSON.parse(localStorage.getItem('emirates'));
 	  }
-  }
+  }*/
 
   if(localStorage.getItem('emirates')==null){
   	apiFactory.getEmirates(function(data){
@@ -200,8 +201,8 @@ if(localStorage.getItem('userdata')!=null){
   }else{
   	$rootScope.emirates = JSON.parse(localStorage.getItem('emirates'));
   }
-
-  if(typeof $cookieStore.get('userdata') == 'undefined')
+  /********ATVIN Storage code********/
+  /*if(typeof $cookieStore.get('userdata') == 'undefined')
   {
 	  apiFactory.UserService(function(data){
 		if(data.error)
@@ -239,7 +240,7 @@ if(localStorage.getItem('userdata')!=null){
 	  if(localStorage.getItem('userdata')!=null){
 	  	$rootScope.userdata = JSON.parse(localStorage.getItem('userdata'));
 	  }
-  }
+  }*/
 
   if(localStorage.getItem('userdata')==null){
   	apiFactory.UserService(function(data){
@@ -347,6 +348,8 @@ if(localStorage.getItem('userdata')!=null){
   $rootScope.logout=function(){
   		$rootScope.loading = true;
 	  apiFactory.siteLogout(function(data){
+		  localStorage.removeItem("userid");
+		  localStorage.removeItem("userdata");
 		  $cookieStore.remove("userid");
 		  $cookieStore.remove("userdata");
 		  $rootScope.userid=0;

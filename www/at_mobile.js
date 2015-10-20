@@ -153,7 +153,11 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore){
-	localStorage.setItem("vintest", "Vinith Samuel");
+	if(localStorage.vintest){
+		alert(localStorage.vintest);
+	}else{
+		localStorage.setItem("vintest", "Vinith Samuel");
+	}
   $rootScope.backBtnShow=false;
   $rootScope.site_url=site_url;
   $rootScope.mainTle='';

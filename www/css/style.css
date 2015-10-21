@@ -2082,7 +2082,7 @@ button.appointmentSubmitBtn,button.appointmentSubmitBtn:hover{  color: white;
   border: none;background: linear-gradient(to bottom, rgb(65, 170, 224), rgb(66, 116, 185));}
   div.item-divider{text-align: center;color: #CA3482}
 label.availabilityClsLabel,.at-color-light,div a.at-color-light{color:#CA3482; }
-.placecodCls select{-webkit-appearance: none;padding: 7px 15px;border-radius: 0;width: 64%;margin-top: 5px;border: none;}
+.placecodCls select{-webkit-appearance: none;padding: 7px 15px;border-radius: 0;width: 64%;margin-top: 5px;border: none;background:#fff;}
 div.about_us.page_content{text-align: justify;color: #fff;}
 div.about_us.page_content a{text-decoration: underline; color: #fff;}
 div.about_us.page_content h2{text-decoration: underline; color: #fff;}

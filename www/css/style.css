@@ -2052,6 +2052,11 @@ h1 {
     font-size: 15px;
     font-weight: 600;
 }
+@media all and (max-width:320px) {
+    .atDealsListMain .atDealsViewDiv .clsDealsListViewBtnBuy a{
+        font-size: 14px;
+    }
+}
 .atDealsListMain .atDealsViewDiv .clsDealsListViewBtnBuyGift a{
     padding-top: 5px;
     font-size: 24px;

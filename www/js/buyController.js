@@ -80,12 +80,10 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
 			if ($scope.optionVal == 0) $rootScope.PageTitle = 'Buy - ' + $scope.deal_detail.post_title;
             else $rootScope.PageTitle = 'Buy - ' + $scope.deal_detail.post_title + " Option " + $scope.optionVal;
             if(data.user_details!=null){
-            	alert(data.user_details);
             	$rootScope.userdata = data.user_details;
             	$cookieStore.put('userdata', $rootScope.userdata);
             	localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
             }else{
-            	alert('inside else part ');
             	if($rootScope.userdata!=null && $rootScope.userdata.ID!=null){
             		$rootScope.userdata = $cookieStore.get('userdata');
             		if(localStorage.getItem('userdata')!=null){
@@ -93,7 +91,6 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
             		}
 	            	$http.get(site_url + '/ajax/aesthetic_wp_load_json.php?platform=mobile&getusermetainfobyid=yes&userid='+$rootScope.userdata.ID).
 		              success(function(data, status, headers, config) {
-		              	alert('testing function ');
 		              	if(data._aes_address_pin[0]){
 		              		$rootScope.userdata._aes_address_pin=data._aes_address_pin[0];
 		              	}

@@ -12,6 +12,8 @@ app.controller('homeController',function($rootScope, $scope, $http,$location,$ro
 				},2000);
 			}else{
 				 $rootScope.loading = false;
+				 if(document.getElementById('progressbar')) document.getElementById('progressbar').style.width="100%";
+				 $rootScope.atShowAnimate = false;
 				 $rootScope.deals=data.deals;
 				 var data={};
 				 data['deals']=$rootScope.deals;

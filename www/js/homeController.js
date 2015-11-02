@@ -35,7 +35,6 @@ app.controller('homeController',function($rootScope, $scope, $http,$location,$ro
 	$rootScope.loadatcategories = function(){
 		apiFactory.getCats(function(data){
 			if(data=='error'){
-				console.log('cateogry loads');
 				$timeout(function(){
 					$rootScope.loadatcategories();
 				},2000);
@@ -59,7 +58,8 @@ app.controller('homeController',function($rootScope, $scope, $http,$location,$ro
 					document.getElementById('progressbar').style.width=$scope.loadDealsDelayValue+'%';
 					$scope.loadDealsDelay();
 				}else{
-					document.getElementById('progressbar').style.width="100%";
+					if(document.getElementById('progressbar'))
+						document.getElementById('progressbar').style.width="100%";
 					$timeout(function(){
 						$rootScope.atShowAnimate = false;
 					},500);
@@ -72,10 +72,27 @@ app.controller('homeController',function($rootScope, $scope, $http,$location,$ro
 		}
 	}
 
+	$scope.checkForDealLoad = function(){
+		if($rootScope.deals==null){
+			$timeout(function(){
+				$scope.checkForDealLoad();
+			},1500);
+		}else{
+			if(document.getElementById('progressbar'))
+				document.getElementById('progressbar').style.width="100%";
+			$timeout(function(){
+				$rootScope.atShowAnimate = false;
+			},500);
+		}
+	}
+
 	if($rootScope.deals==null)
 	{
 		$rootScope.loadatdeals();
 		$scope.loadDealsDelay();
+		$scope.checkForDealLoad();
+	}else{
+		$rootScope.atShowAnimate = false;
 	}
 	
 	if($rootScope.categories==null)

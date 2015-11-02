@@ -215,13 +215,6 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
   		navigator.notification.alert(alertmessage,function(){},'Aesthetic Today','Ok');
   };
 
-  $timeout(function () {
-		$rootScope.atshowAlert('testing function');
-		$timeout(function () {
-			alert('testing function');
-  		},8000);
-  },8000);
-
   $rootScope.$on("$userdetailVars",function(data,userdetail){
 	  var data=userdetail;
   		if(data.error)

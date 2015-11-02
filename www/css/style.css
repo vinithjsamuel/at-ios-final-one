@@ -1,3 +1,4 @@
+body .app{box-shadow: none;}
 .navbar-app {background: #691741;/*#CA3482*/}.clsDescImg {width: 100%}
 .app-content-loading,div.myAccountPage {
     background: #691741;
@@ -1291,6 +1292,7 @@ p.error {
     background: #CA3482;
     border: 0;
     border-radius: 11px;
+    top: 6px;
 }
 #dealRatingOverlay .genPopupNoBorder {
     position: relative;

@@ -85,6 +85,7 @@
             <div class="clsFloatLeft col-lg-10 col-md-10 col-sm-10 clsOptVal">
                 <label ng-show="optionVal==0" for="makecashOnDelivery">&nbsp;Cash On Delivery({{ (deal_detail.deal_discount_price * dealQty.item_qty) }} AED)</label>
                 <label ng-show="optionVal!=0" for="makecashOnDelivery">&nbsp;Cash On Delivery({{ (deal_detail.deals_options[optionVal-1].aes_product_opt_discounted_price * dealQty.item_qty) }} AED)</label>
+                </label><label style="display:none;" id="codoption_extra_text">(Total amount must be greater than 49 AED)</label>
             </div>
         </div>
       

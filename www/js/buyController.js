@@ -36,7 +36,7 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
 		coupon_num = 0;
 			
     $rootScope.updateCouponDiscount = function() {
-        var deal_id = $("#deal_detail_id").val();
+    	var deal_id = $("#deal_detail_id").val();
         var deal_option_val = $("#deal_option_val").val();
         var qty = $("#item_qty").val();
         var coupon_num =0;
@@ -60,6 +60,15 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
 			jQuery("#make50payment").attr("checked", false);
 			jQuery("#makefullpayment").attr("checked",true);
 		}
+
+		/*ATVIN cash on delivery diabled if deal less than 49*/
+		if(totalPrice<49){
+    		document.getElementById('makecashOnDelivery').disabled=true;
+    		document.getElementById('codoption_extra_text').style.display='block';
+    	}else{
+    		document.getElementById('makecashOnDelivery').disabled=false;
+    		document.getElementById('codoption_extra_text').style.display='none';
+    	}
 		
         var offerTotalPrice = deal_offer_price * deal_price;
         if (deal_offer_price != 0) {
@@ -71,6 +80,7 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
         }
     };
     apiFactory.buydealDetails(function(data) {
+    	document.getElementById('makecashOnDelivery').disabled=true;
         if (data.error) {
             $rootScope.loading = false;
             var lastRedirectURL = $location.path();
@@ -91,25 +101,25 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
             		}
 	            	$http.get(site_url + '/ajax/aesthetic_wp_load_json.php?platform=mobile&getusermetainfobyid=yes&userid='+$rootScope.userdata.ID).
 		              success(function(data, status, headers, config) {
-		              	if(data._aes_address_pin[0]){
+		              	if(data._aes_address_pin && data._aes_address_pin[0]){
 		              		$rootScope.userdata._aes_address_pin=data._aes_address_pin[0];
 		              	}
-		              	if(data._aes_address_emirate[0]){
+		              	if(data._aes_address_emirate && data._aes_address_emirate[0]){
 		              		$rootScope.userdata._aes_address_emirate=data._aes_address_emirate[0];
 		              	}
-		              	if(data._aes_address_one[0]){
+		              	if(data._aes_address_one && data._aes_address_one[0]){
 		              		$rootScope.userdata._aes_address_one=data._aes_address_one[0];
 		              	}
-		              	if(data._aes_address_two[0]){
+		              	if(data._aes_address_two && data._aes_address_two[0]){
 		              		$rootScope.userdata._aes_address_two=data._aes_address_two[0];
 		              	}
-		              	if(data._aes_contact[0]){
+		              	if(data._aes_contact && data._aes_contact[0]){
 		              		$rootScope.userdata._aes_contact=data._aes_contact[0];
 		              	}
-		              	if(data.at_first_name[0]){
+		              	if(data.at_first_name && data.at_first_name[0]){
 		              		$rootScope.userdata.at_first_name=data.at_first_name[0];
 		              	}
-		              	if(data.at_last_name[0]){
+		              	if(data.at_last_name && data.at_last_name[0]){
 		              		$rootScope.userdata.at_last_name=data.at_last_name[0];
 		              	}
 		              	$cookieStore.put('userdata', $rootScope.userdata);
@@ -323,7 +333,13 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
 //vin_code
 $(document).ready(function(e) {
     $(document).on('change',"#item_qty",function(){
-		
+    	if(parseInt(document.getElementById('makecashOnDelivery').value)<49){
+    		document.getElementById('makecashOnDelivery').disabled=true;
+    		document.getElementById('codoption_extra_text').style.display='block';
+    	}else{
+    		document.getElementById('makecashOnDelivery').disabled=false;
+    		document.getElementById('codoption_extra_text').style.display='none';
+    	}
 	})
 	$(document).on('click',".half-payment-main-Cls",function(){
 		if($("#make50payment").is(':enabled')) {

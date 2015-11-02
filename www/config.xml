@@ -18,7 +18,6 @@
     <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
     <preference name="prerendered-icon"           value="true" />           <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
-    <preference name="ios-statusbarstyle"         value="black-opaque" />   <!-- ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
     <preference name="detect-data-types"          value="true" />           <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
     <preference name="exit-on-suspend"            value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
     <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
@@ -34,6 +33,7 @@
 <gap:plugin name="org.apache.cordova.dialogs" source="pgb" version="0.2.10" />
 <gap:plugin name="org.apache.cordova.splashscreen" source="pgb" version="0.3.4" />
 <gap:plugin name="org.apache.cordova.inappbrowser" source="pgb" version="0.5.2" />
+<gap:plugin name="org.apache.cordova.statusbar"/>
 <icon src="icon-small.png" gap:platform="ios" width="29" height="29" />
 <icon src="icon-40.png" gap:platform="ios" width="40" height="40" />
 <icon src="icon-50.png" gap:platform="ios" width="50" height="50" />
@@ -71,6 +71,8 @@
 <gap:splash src="Default-Landscape@2x~ipad.png" gap:platform="ios" width="2048" height="1536" />
 
   <preference name="FadeSplashScreen" value="true"/>
+  <preference name="StatusBarOverlaysWebView" value="true" />
+  <preference name="StatusBarStyle" value="lightcontent" />
   <preference name="ShowSplashScreenSpinner" value="false"/>
   <preference name="AutoHideSplashScreen" value="true" />
   <preference name="SplashScreenDelay" value="3000" />

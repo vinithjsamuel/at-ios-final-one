@@ -1,13 +1,4 @@
-var app = angular.module('AtMobileApp', ["ngRoute","mobile-angular-ui","ngSanitize","ngCookies",'timer']);
-app.filter('floor', function() {
-  return function(input) {
-	if(input == 'undefined')
-		return 0;
-	else
-    	return Math.floor(input);
-  };
-});
-
+var app = angular.module('AtMobileApp', ["ngRoute","mobile-angular-ui","ngSanitize","ngCookies",'timer']);app.filter('floor', function() {return function(input) {if(input == 'undefined')return 0;else return Math.floor(input);};});
 app.directive('autoFillSync', function($timeout) {
    return {
       require: 'ngModel',
@@ -171,23 +162,6 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
   if($location.$$search.earned_points!='undefined')
   	 $rootScope.earned_points=$location.$$search.earned_points;
  
- /********ATVIN Storage code********/
-  /*if(typeof $cookieStore.get('emirates') == 'undefined' )
-  {
-	  apiFactory.getEmirates(function(data){
-	  	$rootScope.emirates=data;
-	  	$cookieStore.put('emirates',$rootScope.emirates);
-	  	localStorage.setItem('emirates',JSON.stringify($rootScope.emirates));
-	  })
-  }
-  else
-  {
-	  $rootScope.emirates = $cookieStore.get('emirates');
-	  if(localStorage.getItem('emirates')!=null){
-	  	$rootScope.emirates = JSON.parse(localStorage.getItem('emirates'));
-	  }
-  }*/
-
   if(localStorage.getItem('emirates')==null){
   	apiFactory.getEmirates(function(data){
 	  	$rootScope.emirates=data;
@@ -196,46 +170,6 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
   }else{
   	$rootScope.emirates = JSON.parse(localStorage.getItem('emirates'));
   }
-  /********ATVIN Storage code********/
-  /*if(typeof $cookieStore.get('userdata') == 'undefined')
-  {
-	  apiFactory.UserService(function(data){
-		if(data.error)
-		{   
-			$rootScope.loading = false;
-			$rootScope.userid=0;
-			$rootScope.userdata=null;
-			$cookieStore.put('userid',$rootScope.userid);
-			localStorage.setItem('userid',JSON.stringify($rootScope.userid));
-			$cookieStore.put('userdata',$rootScope.userdata);
-			localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
-		}
-		if(data.success)
-		{
-			$rootScope.userid=data.success.user_id;
-			$rootScope.userdata=data.success.user_data;
-			$rootScope.loading = false;
-		}
-		$cookieStore.put('userid',$rootScope.userid);
-		localStorage.setItem('userid',JSON.stringify($rootScope.userid));
-		$cookieStore.put('userdata',$rootScope.userdata);
-		localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
-	  })
-	 
-  }
-  else
-  {
-	  $rootScope.userid=$cookieStore.get('userid');
-	  
-	  $rootScope.userdata=$cookieStore.get('userdata');
-
-	  if(localStorage.getItem('userid')!=null){
-	  	$rootScope.userid = JSON.parse(localStorage.getItem('userid'));
-	  }
-	  if(localStorage.getItem('userdata')!=null){
-	  	$rootScope.userdata = JSON.parse(localStorage.getItem('userdata'));
-	  }
-  }*/
 
   if(localStorage.getItem('userdata')==null){
   	apiFactory.UserService(function(data){
@@ -468,16 +402,6 @@ app.controller('atPaySuccessController', function($rootScope, $scope, $http,$loc
 	},5000);
 });
 
-/*app.controller('webController', function($rootScope, $scope, $http,$location){
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-		sessionStorage.at_device_preferred = 'web';
-		window.location = site_url;
-	}else{
-		alert('Device Not Found!');
-	}
-});*/
-
-/*in app browser for mobile*/
 app.controller('onInAppBrowseController', function($rootScope, $scope, $http,$location, $timeout, $cookieStore){
 		$scope.userid = $location.$$search.userid;
 		$scope.ref_id = $location.$$search.ref_id;
@@ -559,7 +483,7 @@ app.controller('onInAppBrowseController', function($rootScope, $scope, $http,$lo
 		  		},100);
 		  	});
 		}else{
-			//$location.url('login');
+			/*$location.url('login');*/
 		}
 	}
 

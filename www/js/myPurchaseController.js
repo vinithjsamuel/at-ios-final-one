@@ -73,7 +73,7 @@ app.controller('userAccountController',function($rootScope, $scope, $http, $loca
 				}
 			}).error(function(data, status, headers, config) {
 				$rootScope.loading = false;
-				alert('Error Accessing Network!')
+				$rootScope.atshowAlert('Error Accessing Network!')
 				$location.url('deals/all');
 			});
 		}else{
@@ -287,7 +287,7 @@ app.controller('myPurchaseController',function($rootScope,$scope,$http,$location
                 }
             }).error(function(data, status, headers, config) {
                 $rootScope.loading = false;
-                alert('Error Accessing Network!')
+                $rootScope.atshowAlert('Error Accessing Network!')
                 $location.url('deals/all');
             });
 	}

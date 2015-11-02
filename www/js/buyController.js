@@ -187,17 +187,17 @@ app.controller('buyDealController', function($rootScope, $scope, $http, $locatio
     $rootScope.dealcheck_outcheckout = function(dealcheck_out) {
     	if($scope.deal_detail.meta_datas._is_solid_product=='yes'){
 			if($scope.atdeliverydetail.name==undefined || $scope.atdeliverydetail.email==undefined || $scope.atdeliverydetail.contact==undefined || $scope.atdeliverydetail.address_1==undefined || $scope.atdeliverydetail.pobox==undefined || $scope.atdeliverydetail.city==undefined){
-				alert('Missing Field!');
+				$rootScope.atshowAlert('Missing Field!');
 				return false;
 			}
 			if($scope.atdeliverydetail.name==''||$scope.atdeliverydetail.email==''||$scope.atdeliverydetail.contact==''||$scope.atdeliverydetail.address_1==''||$scope.atdeliverydetail.pobox==''||$scope.atdeliverydetail.city==''){
-				alert('Missing Field!');
+				$rootScope.atshowAlert('Missing Field!');
 				return false;
 			}
 			$http.post(site_url + '/ajax/aesthetic_wp_load_json.php', {atdeliverydetailupdate:'yes',atdeliverydetailinfo:$scope.atdeliverydetail}).
               success(function(data, status, headers, config) {})
               .error(function(data, status, headers, config) {
-               alert('Something went wrong!');
+               $rootScope.atshowAlert('Something went wrong!');
                return false;
         	});
 		}

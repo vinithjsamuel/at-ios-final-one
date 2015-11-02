@@ -423,16 +423,16 @@ app.controller('bookappointmentController', function($rootScope, $scope, $http, 
             $http.post(site_url + '/ajax/aesthetic_wp_load_json.php', {book_appoint:'yes',appointment_info:appointDetails}).
               success(function(data, status, headers, config) {
                 $rootScope.loading = false;
-                alert('Appointment Request Submitted! Thank You!'); $location.path('deals/all');
+                $rootScope.atshowAlert('Appointment Request Submitted! Thank You!'); $location.path('deals/all');
             }).
               error(function(data, status, headers, config) {
-               alert('failed');
+               $rootScope.atshowAlert('failed');
                $rootScope.loading = false;
                $scope.isDisabled = false;
             });
 
         }else{
-            alert('Missing Field!');
+            $rootScope.atshowAlert('Missing Field!');
             $rootScope.loading = false;
             $scope.isDisabled = false;
         }
@@ -469,13 +469,13 @@ app.controller('cashondeliveryController', function($rootScope, $scope, $http, $
                 $scope.placeorder.product_qty = data.product_qty;
                 $scope.placeorder.product_amount_to_pay = data.product_amount_to_pay;
             }else{
-                alert('Something went wrong! Please try again!');
+                $rootScope.atshowAlert('Something went wrong! Please try again!');
                 $location.url('deals/all');
             }
             $rootScope.loading = false;
         })
         .error(function(data, status, headers, config) {
-            alert('Check Your Connection!');
+            $rootScope.atshowAlert('Check Your Connection!');
             $rootScope.loading = false;
             $location.url('deals/all');
         });
@@ -490,7 +490,7 @@ app.controller('cashondeliveryController', function($rootScope, $scope, $http, $
                 $scope.placeorder.user_details._aes_address_two==undefined ||
                 $scope.placeorder.user_details._aes_address_pin==undefined || 
                 $scope.placeorder.city._aes_address_emirate==undefined){
-                alert('Missing Field!');
+                $rootScope.atshowAlert('Missing Field!');
                 $rootScope.loading = false;
                 return false;
             }
@@ -537,7 +537,7 @@ app.controller('cashondeliveryController', function($rootScope, $scope, $http, $
                         $location.url('thank-you');
                     }, 3500);
             }else{
-                alert('Missing Field!');
+                $rootScope.atshowAlert('Missing Field!');
                 $rootScope.loading = false;
                 return false;
             }

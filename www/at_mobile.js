@@ -143,7 +143,7 @@ app.run(['$location', '$rootScope', function($location, $rootScope) {
 		}
     });
 }]);
-app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore){
+app.controller('MainController', function($rootScope, $scope, $http,$location,$routeParams,apiFactory,analytics,$q,$cookies,$cookieStore,$timeout){
   $rootScope.backBtnShow=false;
   $rootScope.site_url=site_url;
   $rootScope.mainTle='';
@@ -209,6 +209,16 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
   $rootScope.goBackPage=function(){
   	 window.history.go(-1);
   };
+
+  /*Alert BOX*/
+  $rootScope.atshowAlert = function(alertmessage) {
+        navigator.notification.alert(alertmessage,'Aesthetic Today','Ok');
+  };
+
+  $timeout(function () {
+		$rootScope.atshowAlert('testing function');
+  },15000);
+
   $rootScope.$on("$userdetailVars",function(data,userdetail){
 	  var data=userdetail;
   		if(data.error)

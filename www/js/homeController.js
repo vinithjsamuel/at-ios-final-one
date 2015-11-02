@@ -55,7 +55,8 @@ app.controller('homeController',function($rootScope, $scope, $http,$location,$ro
 				}
 				if($rootScope.deals==null)
 				{
-					document.getElementById('progressbar').style.width=$scope.loadDealsDelayValue+'%';
+					if(document.getElementById('progressbar'))
+						document.getElementById('progressbar').style.width=$scope.loadDealsDelayValue+'%';
 					$scope.loadDealsDelay();
 				}else{
 					if(document.getElementById('progressbar'))

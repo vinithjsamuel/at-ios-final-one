@@ -46,9 +46,36 @@ app.controller('homeController',function($rootScope, $scope, $http,$location,$ro
 		  });
 	}
 
+	$rootScope.atShowAnimate = true;
+	$scope.loadDealsDelayValue = 5;
+	$scope.loadDealsDelay = function(){
+		if(!$rootScope.loading){
+			$timeout(function(){
+				if($scope.loadDealsDelayValue<80){
+					$scope.loadDealsDelayValue = 5+$scope.loadDealsDelayValue;
+				}
+				if($rootScope.deals==null)
+				{
+					document.getElementById('progressbar').style.width=$scope.loadDealsDelayValue+'%';
+					$scope.loadDealsDelay();
+				}else{
+					document.getElementById('progressbar').style.width="100%";
+					$timeout(function(){
+						$rootScope.atShowAnimate = false;
+					},500);
+				}
+			},800);
+		}else{
+			$timeout(function(){
+				$scope.loadDealsDelay();
+			},600);
+		}
+	}
+
 	if($rootScope.deals==null)
 	{
 		$rootScope.loadatdeals();
+		$scope.loadDealsDelay();
 	}
 	
 	if($rootScope.categories==null)

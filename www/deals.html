@@ -1,6 +1,6 @@
 <div class="scrollable dealsPage">
   <div class="scrollable-content container-fluid section">
-    <div>
+    <div class="at-deals-main-cls" ng-if="!atShowAnimate">
       <div id="no-results" class="feed-message" ng-show="deal_count==0">
         <h3>Uh-oh. No matching deals.</h3>
         <h5>Hurry back soon for deals that are just right for you.</h5>
@@ -43,5 +43,12 @@
       <div ng-hide="noMoreDeals==1" class="clsLoadMore"> <a class="btn-more" ng-click="loadMore()">Load More...</a> </div>
       <p ng-show="noMoreDeals==1">&nbsp;</p>
     </div>
+    <div class="at-deals-animate-cls" ng-if="atShowAnimate">
+    	<div id="progressbar"></div>
+    </div>
   </div>
 </div>
+
+
+
+

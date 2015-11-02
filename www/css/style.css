@@ -2095,3 +2095,7 @@ div.about_us.page_content a{text-decoration: underline; color: #fff;}
 div.about_us.page_content h2{text-decoration: underline; color: #fff;}
 .sidebar-scrollable div.sidebar-logo{width: 40%;margin: auto}
 .sidebar-scrollable div.sidebar-logo img{border-radius: 50%;}
+
+/*ATVIN progress bar css*/
+div.at-deals-animate-cls{height: 30px;overflow: hidden;background-color: none;border-radius: 4px;-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);box-shadow: inset 0 1px 2px rgba(0,0,0,.1);position: fixed;top: 50%;width: 90%;left: 5%;}
+div.at-deals-animate-cls #progressbar{background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);-webkit-background-size: 40px 40px;background-size: 40px 40px;float: left;width: 0;height: 30px;font-size: 12px;line-height: 30px;color: #fff;text-align: center;background-color: #ca3482;-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);-webkit-transition: width .6s ease;-o-transition: width .6s ease;transition: width .6s ease;}

@@ -217,6 +217,9 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 
   $timeout(function () {
 		$rootScope.atshowAlert('testing function');
+		$timeout(function () {
+			alert('testing function');
+  		},8000);
   },8000);
 
   $rootScope.$on("$userdetailVars",function(data,userdetail){

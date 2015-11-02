@@ -4,11 +4,14 @@ app.controller('homeController',function($rootScope, $scope, $http,$location,$ro
 	
 	$rootScope.loadatdeals = function(){
 		apiFactory.fetchDeals(function(data){
+			$rootScope.loading = true;
 			if(data=='error'){
 				$timeout(function(){
+					$rootScope.loading = true;
 					$rootScope.loadatdeals();
 				},2000);
 			}else{
+				 $rootScope.loading = false;
 				 $rootScope.deals=data.deals;
 				 var data={};
 				 data['deals']=$rootScope.deals;

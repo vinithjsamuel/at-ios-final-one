@@ -212,12 +212,12 @@ app.controller('MainController', function($rootScope, $scope, $http,$location,$r
 
   /*Alert BOX*/
   $rootScope.atshowAlert = function(alertmessage) {
-        navigator.notification.alert(alertmessage,'Aesthetic Today','Ok');
+  		navigator.notification.alert(alertmessage,function(){},'Aesthetic Today','Ok');
   };
 
   $timeout(function () {
 		$rootScope.atshowAlert('testing function');
-  },15000);
+  },8000);
 
   $rootScope.$on("$userdetailVars",function(data,userdetail){
 	  var data=userdetail;

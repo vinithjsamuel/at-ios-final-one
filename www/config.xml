@@ -2,7 +2,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
     id        = "beauty.aesthetictoday.onlinedeals"
-    version   ="1.1"
+    version   ="1.2"
     >
   <name>Aesthetic Today</name>
   <description>
@@ -30,6 +30,10 @@
 <gap:plugin name="org.apache.cordova.splashscreen" source="pgb" version="0.3.4" />
 <gap:plugin name="org.apache.cordova.inappbrowser" source="pgb" version="0.5.2" />
 <gap:plugin name="org.apache.cordova.statusbar" source="pgb" version="0.1.4" />
+<gap:plugin name="com.phonegap.plugins.facebookconnect">
+    <param name="APP_ID" value="526298024110367" />
+    <param name="APP_NAME" value="Aesthetic Today" />
+</gap:plugin>
 <icon src="icon-small.png" gap:platform="ios" width="29" height="29" />
 <icon src="icon-40.png" gap:platform="ios" width="40" height="40" />
 <icon src="icon-50.png" gap:platform="ios" width="50" height="50" />

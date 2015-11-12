@@ -48,7 +48,7 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
             url: site_url + '/mobile_api.php'
         }).success(function(data) {
             if (data.error) {
-                 rootScope.loading = false;
+                $rootScope.loading = false;
                 $scope.resMessages[0] = {
                     msgType: 'alert-error',
                     msg: data.error.email
@@ -230,6 +230,55 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
             }
         })
     }
+    /*FB Login*/
+    $rootScope.atfblogin = function(buypageurl){
+        facebookConnectPlugin.login(["public_profile"], function (response){
+            if(response.status == "connected"){
+                if(buypageurl===undefined) $rootScope.atfbgetuserinfo();
+                else $rootScope.atfbgetuserinfo(buypageurl);
+            }else{
+                $rootScope.atshowAlert('Error Connecting Facebook!');
+            }
+        }, function (error) { 
+            $rootScope.atshowAlert('Error Connecting Facebook!');
+        });
+        return false;
+    }
+
+    $rootScope.atfbgetuserinfo = function(buypageurl){
+        facebookConnectPlugin.api('me?fields=id,name,email,picture,gender',["public_profile"], function (response){
+            if(buypageurl===undefined) $rootScope.fbLoginRegisterFn(response);
+            else $rootScope.fbLoginRegisterFn(response,buypageurl);
+        }, function (error) { 
+            $rootScope.atshowAlert('Error Connecting Facebook!');
+        });
+    }
+
+    $rootScope.atfbinit = function(buypageurl){
+        $rootScope.toggle('loginOverlay', 'off');
+        $rootScope.toggle('registerOverlay', 'off');
+        /******Generate Facebook hash key**********
+        Syntax: keytool -exportcert -alias <RELEASE_KEY_ALIAS> -keystore <RELEASE_KEY_PATH> | openssl sha1 -binary | openssl base64
+        Test: keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+        Live:(Locate Android Folder): keytool -exportcert -alias DanInternetAes123 -keystore AestheticToday.keystore | openssl sha1 -binary | openssl base64*/
+        $rootScope.loading = true;
+        facebookConnectPlugin.getAccessToken(function(token) {
+            if(buypageurl===undefined) $rootScope.atfbgetuserinfo();
+            else $rootScope.atfbgetuserinfo(buypageurl);
+        }, function(err) {
+            if(buypageurl===undefined) $rootScope.atfblogin();
+            else $rootScope.atfblogin(buypageurl);
+        });
+        /*facebookConnectPlugin.logout(function (response){
+            $rootScope.atshowAlert("user: " + JSON.stringify(response));
+            $rootScope.atfblogin();
+        }, function (error){
+            $rootScope.atshowAlert("error: " + JSON.stringify(error));
+        });*/
+        $rootScope.loading = false;
+        return false;
+    }
+
     this.registerSubmitForm = function(registerFrm) {
         var name = registerFrm.name;
         var user_name = registerFrm.email;
@@ -288,7 +337,7 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
     this.loginSubmitForm = function(LoginForm) {
         var user_name = LoginForm.email;
         var pwd = LoginForm.pwdField;
-        rootScope.loading = true;
+        $rootScope.loading = true;
         $("#submitFrmLogin").attr('disabled', true);
         $("#submitFrmLogin").html('Please Wait ...');
         this.resMessage = [];
@@ -332,6 +381,49 @@ app.controller('loginController', function($rootScope, $scope, $http, $location,
             }
         })
     }
+
+    $rootScope.fbLoginRegisterFn = function(fbreturn,isbuypage) {
+        if(fbreturn.id){
+            $rootScope.loading = true;
+            $http({
+                method: 'POST',
+                data: {
+                    fbloginregister: 'yes',
+                    login_user: 'yes',
+                    postdata:fbreturn
+                },
+                url: site_url + '/ajax/aesthetic_wp_load_json.php'
+            }).success(function(data) {
+                $rootScope.loading = false;
+                if (data.success) {
+                    $rootScope.userid = data.success.user_id;
+                    $rootScope.userdata = data.success.user_data;
+                    $cookieStore.put('userid', $rootScope.userid);
+                    $cookieStore.put('userdata', $rootScope.userdata);
+                    localStorage.setItem('userid',JSON.stringify($rootScope.userid));
+                    localStorage.setItem('userdata',JSON.stringify($rootScope.userdata));
+                    $rootScope.toggle('loginOverlay', 'off');
+                    $rootScope.toggle('registerOverlay', 'off');
+                    if(isbuypage=== undefined) window.location = '#/deals/all';
+                    else window.location = '#'+isbuypage;
+                }else{
+                    $rootScope.atshowAlert("Error Logging In!");
+                }
+            })
+        }else{
+            $rootScope.atshowAlert("Error Connecting Facebook!");
+            $rootScope.loading = false;
+        }
+    }
+
+    $rootScope.atfbBuyinit = function(){
+        /*$location.$$url;*/
+        $rootScope.loading = true;
+        $rootScope.atfbinit($location.$$url);
+        $rootScope.loading = false;
+    }
+
+
 });
 app.controller('bookappointmentController', function($rootScope, $scope, $http, $location,$timeout) {
     /*if(!$rootScope.userid){$location.path('login');}*/

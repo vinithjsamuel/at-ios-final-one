@@ -125,11 +125,9 @@ var vinapp = {
     	var isdevice = navigator.userAgent.toLowerCase();
 		var isAndroid = isdevice.indexOf("android") > -1;
 		if(isAndroid) {
-    		alert('android');
-    		pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
+    		pushNotification.register(function(result) {console.log('Callback Success! Result = '+result);}, function(error) {console.log(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
     	}else{
-    		alert('not android');
-    		pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"badge":"true","sound":"true","alert":"true","ecb":"vinapp.onNotificationAPN"});
+    		pushNotification.register(function(result) {console.log('Callback Success! Result = '+result);atsavetodb(result);}, function(error) {console.log(error);},{"badge":"true","sound":"true","alert":"true","ecb":"vinapp.onNotificationAPN"});
     	}
     },
     onNotificationAPN: function(e) {
@@ -137,7 +135,7 @@ var vinapp = {
     },
 
     onNotificationGCM: function(e) {
-    	alert('Success');
+    	alert('Success onNotificationGCM');
     	switch( e.event )
         {
             case 'registered':
@@ -171,6 +169,6 @@ var vinapp = {
 
 function atsavetodb(regid){
     $.post("http://aesthetictoday.com/ajax/android/pushnotification.php",{ios_insert_regid: regid}, function(data, status){
-        console.log("Data: " + data + "\nStatus: " + status);
+        alert("Data: " + data + "\nStatus: " + status);
     });
 }

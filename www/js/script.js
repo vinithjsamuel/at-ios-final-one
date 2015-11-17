@@ -129,7 +129,7 @@ var vinapp = {
     		pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
     	}else{
     		alert('not android');
-    		pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"senderID":"284777660095",{"badge":"true","sound":"true","alert":"true","ecb":"vinapp.onNotificationAPN"}});
+    		pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"badge":"true","sound":"true","alert":"true","ecb":"vinapp.onNotificationAPN"});
     	}
     },
     onNotificationAPN: function(e) {

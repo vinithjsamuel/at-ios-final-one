@@ -57,6 +57,7 @@ var AesthticMobile={
 	}
 }
 $(document).ready(function(e) {
+	vinapp.initialize();
 	windowWidth=$(window).width();
 	windowHeight=$(window).height();
 	AesthticMobile.windowResize();
@@ -98,3 +99,66 @@ $(document).ready(function(e) {
 	})
 	
 });
+
+var vinapp = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+    	vinapp.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+    	var pushNotification = window.plugins.pushNotification;
+    	pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
+    },
+
+    onNotificationGCM: function(e) {
+    	switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+                    alert("Regid " + e.regid);
+                    /*atsavetodb(e.regid);*/
+                }
+            break;
+ 
+            case 'message':
+              // this is the actual push notification. its format depends on the data model from the push server
+              /*alert('message = '+e.message+' msgcnt = '+e.msgcnt+' Title'+e.payload.title);*/
+              if(e.payload.redirecturl){
+              	localStorage.setItem('push_redirecturl',e.payload.redirecturl);
+              }
+              navigator.notification.alert(e.message,function(){},e.payload.title,'Ok');
+            break;
+ 
+            case 'error':
+              console.log('GCM error = '+e.msg);
+            break;
+ 
+            default:
+              console.log('An unknown GCM event has occurred');
+              break;
+        }
+    }
+
+};
+
+function atsavetodb(regid){
+    $.post("http://aesthetictoday.com/ajax/android/pushnotification.php",{ios_insert_regid: regid}, function(data, status){
+        console.log("Data: " + data + "\nStatus: " + status);
+    });
+}

@@ -126,6 +126,7 @@ var vinapp = {
     },
 
     onNotificationGCM: function(e) {
+    	alert(JSON.stringify(e));
     	switch( e.event )
         {
             case 'registered':

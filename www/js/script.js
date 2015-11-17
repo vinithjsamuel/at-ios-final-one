@@ -122,11 +122,22 @@ var vinapp = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
     	var pushNotification = window.plugins.pushNotification;
-    	pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
+    	var isdevice = navigator.userAgent.toLowerCase();
+		var isAndroid = isdevice.indexOf("android") > -1;
+		if(isAndroid) {
+    		alert('android');
+    		pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
+    	}else{
+    		alert('not android');
+    		pushNotification.register(function(result) {alert('Callback Success! Result = '+result);}, function(error) {alert(error);},{"senderID":"284777660095",{"badge":"true","sound":"true","alert":"true","ecb":"vinapp.onNotificationAPN"}});
+    	}
+    },
+    onNotificationAPN: function(e) {
+    	alert(JSON.stringify(e));
     },
 
     onNotificationGCM: function(e) {
-    	alert(JSON.stringify(e));
+    	alert('Success');
     	switch( e.event )
         {
             case 'registered':

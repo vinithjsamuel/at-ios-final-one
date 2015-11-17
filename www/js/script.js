@@ -127,11 +127,54 @@ var vinapp = {
 		if(isAndroid) {
     		pushNotification.register(function(result) {console.log('Callback Success! Result = '+result);}, function(error) {console.log(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
     	}else{
-    		pushNotification.register(function(result) {console.log('Callback Success! Result = '+result);atsavetodb(result);}, function(error) {console.log(error);},{"badge":"true","sound":"true","alert":"true","ecb":"vinapp.onNotificationAPN"});
+    		pushNotification.register(
+			    function(result) {console.log('Callback Success! Result = '+result);atsavetodb(result);},
+			    function(error) {console.log(error);},
+			    {
+			        "badge":"true",
+			        "sound":"true",
+			        "alert":"true",
+			        "ecb":"vinapp.onNotificationAPN"
+			    }
+			);
+    		/*pushNotification.register(function(result) {console.log('Callback Success! Result = '+result);atsavetodb(result);}, function(error) {console.log(error);},{"badge":"true","sound":"true","alert":"true","ecb":"vinapp.onNotificationAPN"});*/
     	}
     },
-    onNotificationAPN: function(e) {
-    	alert(JSON.stringify(e));
+    onNotificationAPN: function(event) {
+    	alert(JSON.stringify(event));
+    	if ( event.alert )
+	    {
+	        navigator.notification.alert(event.alert);
+	    }
+
+	    if ( event.sound )
+	    {
+	        var snd = new Media(event.sound);
+	        snd.play();
+	    }
+
+	    if ( event.badge )
+	    {
+	        pushNotification.setApplicationIconBadgeNumber(
+	        	function successHandler (result) {
+				    alert('result 160 = ' + result);
+				},
+	        	function errorHandler (error) {
+				    alert('error 163 = ' + error);
+				},
+	        	event.badge
+	        );
+	    }else{
+	    	pushNotification.setApplicationIconBadgeNumber(
+	    		function successHandler (result) {
+				    alert('result 170 = ' + result);
+				},
+	        	function errorHandler (error) {
+				    alert('error 174 = ' + error);
+				},
+	        	1
+	    	);
+	    }
     },
 
     onNotificationGCM: function(e) {

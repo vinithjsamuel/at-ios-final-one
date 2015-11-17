@@ -24,11 +24,11 @@
     <preference name="HideKeyboardFormAccessoryBar" value="true"/>
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="android-installLocation"    value="auto" />
-<gap:plugin name="org.apache.cordova.camera" source="pgb" version="0.3.2" />
-<gap:plugin name="org.apache.cordova.dialogs" source="pgb" version="0.2.10" />
-<gap:plugin name="org.apache.cordova.vibration" source="pgb" version="0.3.11" />
-<gap:plugin name="org.apache.cordova.splashscreen" source="pgb" version="0.3.4" />
-<gap:plugin name="org.apache.cordova.inappbrowser" source="pgb" version="0.5.2" />
+<gap:plugin name="org.apache.cordova.camera" source="pgb" version="0.3.6" />
+<gap:plugin name="org.apache.cordova.dialogs" source="pgb" version="0.3.0" />
+<gap:plugin name="org.apache.cordova.vibration" source="pgb" version="0.3.13" />
+<gap:plugin name="org.apache.cordova.splashscreen" source="pgb" version="1.0.0" />
+<gap:plugin name="org.apache.cordova.inappbrowser" source="pgb" version="0.6.0" />
 <gap:plugin name="org.apache.cordova.statusbar" source="pgb" version="0.1.4" />
 <gap:plugin name="com.phonegap.plugins.pushplugin" />
 <gap:plugin name="com.phonegap.plugins.facebookconnect">

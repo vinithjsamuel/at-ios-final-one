@@ -121,6 +121,11 @@ var vinapp = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+    	var client = new Apigee.Client({
+    		orgName:"aesthetictoday",
+    		appName:"sandbox",
+    		logging:true
+	    });
     	var pushNotification = window.plugins.pushNotification;
     	var isdevice = navigator.userAgent.toLowerCase();
 		var isAndroid = isdevice.indexOf("android") > -1;
@@ -128,7 +133,24 @@ var vinapp = {
     		pushNotification.register(function(result) {console.log('Callback Success! Result = '+result);}, function(error) {console.log(error);},{"senderID":"284777660095","ecb":"vinapp.onNotificationGCM"});
     	}else{
     		pushNotification.register(
-			    function(result) {console.log('Callback Success! Result = '+result);atsavetodb(result);},
+			    function(result) {
+			    	atsavetodb(result);
+			    	var options = {
+	                    notifier:"AestheticToday",
+	                    deviceToken:result
+	                };
+	                client.registerDevice(options, function(error, result){
+	                	if(error) {
+	                		alert(JSON.stringify(error));
+	                		console.log(error);
+	                	} else {
+	                		alert(JSON.stringify(result));
+	                		console.log(result);
+	                		sendpushtoatdevice();
+	                	}
+	                });
+			    	console.log('Callback Success! Result = '+result);
+			    },
 			    function(error) {console.log(error);},
 			    {
 			        "badge":"true",
@@ -214,4 +236,26 @@ function atsavetodb(regid){
     $.post("http://aesthetictoday.com/ajax/android/pushnotification.php",{ios_insert_regid: regid}, function(data, status){
         alert("Data: " + data + "\nStatus: " + status);
     });
+}
+
+
+function sendpushtoatdevice(){
+	alert('sendpushtoatdevice fn');
+	setTimeout(function() {
+		var devicePath = "devices/"+client.getDeviceUUID()+"/notifications";
+		var options = {
+			notifier:"AestheticToday",
+			path:devicePath,
+			message:"hello world from JS"
+		};
+		client.sendPushToDevice(options, function(error, data){
+			if(error) {
+				alert(JSON.stringify(error));
+				console.log(error);
+			} else {
+				alert(JSON.stringify(data));
+				console.log("push sent");
+			}
+		});
+	}, 5000);
 }

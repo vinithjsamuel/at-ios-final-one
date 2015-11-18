@@ -123,7 +123,7 @@ var vinapp = {
     receivedEvent: function(id) {
     	var client = new Apigee.Client({
     		orgName:"aesthetictoday",
-    		appName:"sandbox",
+    		appName:"aesthetictoday",
     		logging:true
 	    });
     	var pushNotification = window.plugins.pushNotification;
@@ -141,10 +141,10 @@ var vinapp = {
 	                };
 	                client.registerDevice(options, function(error, result){
 	                	if(error) {
-	                		alert(JSON.stringify(error));
+	                		alert('line144'+JSON.stringify(error));
 	                		console.log(error);
 	                	} else {
-	                		alert(JSON.stringify(result));
+	                		alert('line147'+JSON.stringify(result));
 	                		console.log(result);
 	                		sendpushtoatdevice();
 	                	}
@@ -163,7 +163,7 @@ var vinapp = {
     	}
     },
     onNotificationAPN: function(event) {
-    	alert(JSON.stringify(event));
+    	alert('line166'+JSON.stringify(event));
     	if ( event.alert )
 	    {
 	        navigator.notification.alert(event.alert);
@@ -242,7 +242,9 @@ function atsavetodb(regid){
 function sendpushtoatdevice(){
 	alert('sendpushtoatdevice fn');
 	setTimeout(function() {
+		alert(client.getDeviceUUID());
 		var devicePath = "devices/"+client.getDeviceUUID()+"/notifications";
+		alert(devicePath);
 		var options = {
 			notifier:"AestheticToday",
 			path:devicePath,

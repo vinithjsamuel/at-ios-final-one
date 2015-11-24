@@ -134,6 +134,14 @@ var pushapp = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+    	if(PushbotsPlugin.isiOS()){
+			PushbotsPlugin.initializeiOS("565431621779599c3a8b4568");
+			alert('pushbot works ios');
+		}
+		if(PushbotsPlugin.isAndroid()){
+			PushbotsPlugin.initializeAndroid("565431621779599c3a8b4568", "284777660095");
+			alert('pushbot works android');
+		}
         var pushNotification = window.plugins.pushNotification;
         pushNotification.register(this.tokenHandler,this.errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"pushapp.onNotificationAPN"});
     },
@@ -189,6 +197,6 @@ var pushapp = {
 pushapp.initialize();
 function atsavetodb(regid){
     $.post("http://aesthetictoday.com/ajax/android/pushnotification.php",{ios_insert_regid: regid}, function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+        console.log("Data: " + data + "\nStatus: " + status);
     });
 }
